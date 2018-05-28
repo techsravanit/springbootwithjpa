@@ -1,0 +1,56 @@
+//Configures the build script classpath for this project.
+
+/** buildscript dependencies jar file will be downloaded from buildscript repositories.[Project external dependency]
+	The “buildscript” block only controls dependencies for the buildscript process itself, 
+	not for the application code. As various gradle plugin like spring-boot-gradle-plugin is found from buildscript repos. 
+	That plugin would not be referenced as dependencies for the application code.
+*/
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.7.RELEASE")
+    }
+}
+
+//Apply the java plugin to add support for Java
+apply plugin: 'java'
+//Apply the maven plugin to add support for maven 
+apply plugin: 'maven'
+
+group = 'com.purpletalk'
+version = '0.0.1-SNAPSHOT'
+
+description = """springbootwithjpa"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+/** repositaries && dependencies
+	root level dependencies jar file will be downloaded from root level repositories.[For project dependency]
+	But for project compilation and test running jar files like groovy all jar, junit 
+	and testng jar will be found from root level repositories.*/
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+        
+     maven { url "https://repo.spring.io/milestone" }
+     maven { url "https://repo.spring.io/snapshot" }
+     maven { url "https://dl.bintray.com/rabbitmq/maven-milestones" }
+     maven { url "http://repo.maven.apache.org/maven2" }
+     
+}
+
+//Configures the dependencies for this project.
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.0.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.0.RELEASE'
+    runtime group: 'org.postgresql', name: 'postgresql', version:'42.2.1'
+    runtime group: 'com.h2database', name: 'h2', version:'1.4.196'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.0.RELEASE'
+}
