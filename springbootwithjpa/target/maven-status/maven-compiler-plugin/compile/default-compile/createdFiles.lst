@@ -1,0 +1,5 @@
+com/purpletalk/SpringbootwithjpaApplication.class
+com/purpletalk/beans/UserController.class
+com/purpletalk/helper/UserRepositary.class
+com/purpletalk/helper/UserService.class
+com/purpletalk/entities/TestUser.class
